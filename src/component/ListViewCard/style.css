@@ -1,0 +1,20 @@
+.listview-card-wrapper{
+    max-height: 132px;
+}
+
+.listview-card-wrapper .pokemon-details h3{
+    margin-top: 0;
+}
+
+.listview-card-wrapper .pokemon-details h3 span {
+    color: #919191;
+}
+
+.listview-card-wrapper .pokemon-details ul li{
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    line-height: 1;
+    background-color: #e33d34;
+    margin-right: 5px;
+}
