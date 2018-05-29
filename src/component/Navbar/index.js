@@ -35,7 +35,7 @@ class Navbar extends Component {
                             <button className="form-control dropdown-toggle"
                                     type="button"
                                     data-toggle="dropdown">
-                                { this.props.selectValue === '' ? 'Select Type' : this.props.selectValue}
+                                { this.props.selectValue === '' ? 'Select Color' : this.props.selectValue}
                                 <i className="fa fa-angle-down"></i>
                             </button>
                             <ul className="dropdown-menu">

@@ -23,7 +23,8 @@ class Home extends Component {
             tabIndex: 1,
             activePage: 1,
             itemsPerPage: 12,
-             width: 0
+             width: 0,
+            color: ''
         }
 
         this.handleSorting = this.handleSorting.bind(this)
@@ -42,6 +43,7 @@ class Home extends Component {
             this.setState({ pokemons: this.props.allPokemon, loading: false });
         })
         this.props.getTypeResults()
+
     }
 
     componentWillUnmount() {
@@ -52,15 +54,18 @@ class Home extends Component {
         this.setState({ width: window.innerWidth });
     }
     handleSelect(value) {
+        // const allPokemon = _.filter(this.props.allPokemon, (item)=>{
+        //     let flag = false;
+        //     item.types.some((type,i) => {
+        //         flag = _.includes(type.type.name,value);
+        //         if(flag){
+        //             return true;
+        //         }
+        //     })
+        //     return flag;
+        // });
         const allPokemon = _.filter(this.props.allPokemon, (item)=>{
-            let flag = false;
-            item.types.some((type,i) => {
-                flag = _.includes(type.type.name,value);
-                if(flag){
-                    return true;
-                }
-            })
-            return flag;
+            return _.includes(item.color, value)
         });
         this.setState({pokemons: allPokemon,selectValue: value});
     }

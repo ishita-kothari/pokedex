@@ -20,17 +20,23 @@ export function getTotalResults(url) {
 }
 
 export function getPokemon(res) {
-        const axiosArray = [];
-        res.map((e, index) => {
-            axiosArray.push(axios.get(e.url));
+    const axiosArray = [],speciesArray = [];
+    res.map((e, index) => {
+        axiosArray.push(axios.get(e.url));
+    });
+    return Promise.all(axiosArray).then((allResp) => {
+        let dataArray = [];
+        allResp.map((resp) => {
+            speciesArray.push(axios.get(resp.data.species.url));
+            dataArray.push(resp.data);
         });
-        return Promise.all(axiosArray).then((allResp) => {
-            let dataArray = [];
-            allResp.map((resp) => {
-                dataArray.push(resp.data);
+        return Promise.all(speciesArray).then((speciesRespArray) => {
+            speciesRespArray.map((speciesRes,key) => {
+                dataArray[key].color = speciesRes.data.color.name;
             });
             return dataArray;
         });
+    });
 }
 export function totalResultResponse(res) {
     return {
@@ -41,7 +47,7 @@ export function totalResultResponse(res) {
 
 export function getTypeResults() {
     return (dispatch) => {
-        return callApi('/type').then((res) =>{
+        return callApi('/pokemon-color').then((res) =>{
             dispatch(typeResultResponse(res.data.results));
         });
     };
@@ -60,3 +66,4 @@ export function allPokemonResp(res) {
         payload: res
     }
 }
+
